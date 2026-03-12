@@ -1,0 +1,7 @@
+pytest
+selenium
+pytest-bdd
+behave
+pytest-html
+allure-python-commons
+allure-pytest-bdd
