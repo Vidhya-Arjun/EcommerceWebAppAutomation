@@ -13,6 +13,7 @@ class ProductPage(BasePage):
     add_to_cart_xpath = "//button[contains(@id,'add-to-cart')]"
 
 
+
     def cart_icon_is_vissible(self):
         return self.is_element_visible("shopping_cart_icon_xpath",self.shopping_cart_icon_xpath)
 
