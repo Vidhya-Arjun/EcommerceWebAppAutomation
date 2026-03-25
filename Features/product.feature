@@ -26,16 +26,16 @@ Examples:
   | standard_user   | secret_sauce  |
 
 
-@test_add_to_cart
-Scenario Outline: Add selected products to cart and validate
+Scenario: Complete checkout and validate orderWhen the user proceeds to checkout
+
   Given the user is on the login page
   When the user enters "<username>" and "<password>"
   And clicks on login button
   Then the user should be on the dashboard page
-  When the user selects 4 random products and adds to cart
-  Then the cart icon count should be 4
-  And the selected products should be present in the cart
+  When the user selects random products
 
-Examples:
-  | username       | password      |
-  | standard_user  | secret_sauce  |
+  And the user fills in checkout details
+    | first_name | last_name | postal_code |
+    | John       | Doe       | 12345       |
+  Then the order summary should reflect correct product data
+  And the user should receive a confirmation message

@@ -1,3 +1,4 @@
+from selenium.webdriver.common.by import By
 
 from Features.pages.BasePage import BasePage
 
@@ -6,23 +7,33 @@ class CartPage(BasePage):
         super().__init__(driver)
 
     shopping_cart_container_id = "shopping_cart_container"
-    cart_item_xpath = "//div[@class='cart_item']"
-    item_names_xpath = ".//div[@class='inventory_item_name']"
+    cart_item_xpath = "//div[@class='cart_item']//a/div"
+    item_names_xpath = "//div[@class='inventory_item_name ' and normalize-space() ='{}']"
     item_prices_xpath = ".//div[@class='inventory_item_price']"
+    products_addition_xpath = "//div[@class='inventory_item_name ' and normalize-space() ='{}']/following::button"
+    cart_count_xpath = "//span[@class='shopping_cart_badge']"
 
    # 🔹 Open cart
     def open_cart(self):
         self.click_element("shopping_cart_container_id",self.shopping_cart_container_id)
     # 🔹 Get all cart items
-    def get_cart_items(self):
-        return self.get_elements("cart_item_xpath",self.cart_item_xpath)
+    # def get_cart_items(self):
+    #     return self.get_elements("cart_item_xpath",self.cart_item_xpath)
 
     # 🔹 Get product names from cart
     def get_cart_item_names(self):
-        items = self.get_cart_items()
-        return [item.self.get_elements("item_names_xpath",self.item_names_xpath).text for item in items]
+        items = self.get_elements("cart_item_xpath", self.cart_item_xpath)
+        return [item.text for item in items]
 
     # 🔹 Get product prices from cart
-    def get_cart_item_prices(self):
-        items = self.get_cart_items()
-        return [item.self.get_elements("item_prices_xpath",self.item_prices_xpath).text for item in items]
+    # def get_cart_item_prices(self):
+    #     items = self.get_cart_items()
+    #     return [item.self.get_elements("item_prices_xpath",self.item_prices_xpath).text for item in items]
+
+    def add_products_tocart(self, item_name):
+        xpath = f"//div[text()='{item_name}']/ancestor::div[@class='inventory_item']//button"
+        self.click_element("add_to_cart_xpath", xpath)
+
+
+    def get_cart_count(self):
+        return self.retrieve_element_text("cart_count_xpath",self.cart_count_xpath)
