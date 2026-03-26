@@ -16,7 +16,7 @@ Framework Features:
 
 Behave BDD is used with selenium pytest
 
-Page Object Model (POM) Each page functionality is encapsulated inside dedicated page classes.
+Page Object Model (POM) Each page functionality is encapsulated inside dedicated page classes and integrated with step definition.
 
 Data Driven Testing Login scenarios are executed qnd report are extracted using allure report
 
