@@ -16,19 +16,13 @@ class CartPage(BasePage):
    # 🔹 Open cart
     def open_cart(self):
         self.click_element("shopping_cart_container_id",self.shopping_cart_container_id)
-    # 🔹 Get all cart items
-    # def get_cart_items(self):
-    #     return self.get_elements("cart_item_xpath",self.cart_item_xpath)
 
     # 🔹 Get product names from cart
     def get_cart_item_names(self):
         items = self.get_elements("cart_item_xpath", self.cart_item_xpath)
         return [item.text for item in items]
 
-    # 🔹 Get product prices from cart
-    # def get_cart_item_prices(self):
-    #     items = self.get_cart_items()
-    #     return [item.self.get_elements("item_prices_xpath",self.item_prices_xpath).text for item in items]
+
 
     def add_products_tocart(self, item_name):
         xpath = f"//div[text()='{item_name}']/ancestor::div[@class='inventory_item']//button"
